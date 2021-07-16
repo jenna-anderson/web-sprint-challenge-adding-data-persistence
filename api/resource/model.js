@@ -5,8 +5,10 @@ const getResources = async () => {
     return resources
 }
 
-const createResource = () => {
-    console.log('createResources wired successfully')
+const createResource = async (resource) => {
+    const [id] = await db('resources').insert(resource)
+    const [newResource] = await db('resources').where('resource_id', id)
+    return(newResource)
 }
 
 module.exports = {
