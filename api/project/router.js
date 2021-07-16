@@ -13,8 +13,14 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.post('/', (req, res, next) => {
-    Projects.createProject()
+router.post('/', async (req, res, next) => {
+    try {
+        const project = req.body
+        const projects = await Projects.createProject(project)
+        res.status(201).json(projects)
+    } catch(err) {
+        next(err)
+    }
 })
 
 module.exports = router
