@@ -1,6 +1,8 @@
+const db = require('../../data/dbConfig')
 
-const getResources = () => {
-    console.log('getResources successfully wired')
+const getResources = async () => {
+    const resources = await db('resources')
+    return resources
 }
 
 const createResource = () => {
