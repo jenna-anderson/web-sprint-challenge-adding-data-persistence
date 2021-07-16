@@ -50,21 +50,6 @@ const createTask = async (task) => {
     }
 }
 
-// const helperBoolean = (obj, keyName) => {
-//     console.log(obj[keyName])
-//     if(obj[keyName] === 0) {
-//         return {
-//             ...obj,
-//             key: false
-//         }
-//     } else {
-//         return {
-//             ...obj,
-//             keyName: true
-//         }
-//     }
-// }
-
 module.exports = {
     getTasks,
     createTask
