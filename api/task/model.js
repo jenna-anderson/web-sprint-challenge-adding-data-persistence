@@ -4,7 +4,6 @@ const getTasks = async() => {
     const tasks = await db('tasks as t')
         .join('projects as p', 'p.project_id', 't.project_id')
 
-    console.log(tasks)
     const tasksWithTasksBoolean = tasks.map(task => {
         if(task["task_completed"] === 0) {
             return {
@@ -35,8 +34,20 @@ const getTasks = async() => {
     return tasksWithBooleans
 }
 
-const createTask = () => {
-    console.log('createTask wired successfully')
+const createTask = async (task) => {
+    const [id] = await db('tasks').insert(task)
+    const [newTask] = await db('tasks').where('task_id', id)
+    if(newTask["task_completed"] === 0) {
+        return {
+            ...newTask,
+            "task_completed": false
+        }
+    } else {
+        return {
+            ...newTask,
+            "task_completed": true
+        }
+    }
 }
 
 module.exports = {
